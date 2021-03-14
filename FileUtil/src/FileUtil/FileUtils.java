@@ -63,10 +63,12 @@ public class FileUtils {
 			for(Path subPath : ds) {
 				if(Files.isDirectory(subPath)) {
 					deleteDirectoryWithSubDirectoryAndFile(subPath);
+
 				} else {
 					deleteFile(subPath);
 				}
 			}
+			deleteDirectory(path);
 		}
 	}
 
