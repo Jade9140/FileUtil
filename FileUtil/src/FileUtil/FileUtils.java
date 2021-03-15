@@ -3,22 +3,42 @@ package FileUtil;
 import java.io.IOException;
 import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.DirectoryStream;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
 public class FileUtils {
 
-	public static boolean createDirectory(Path path) {
 
-		return true;
+	/**
+	 * 文字列パスをパスへ変換する。
+	 * @param str 文字列パス
+	 * @return パス
+	 */
+	public static Path convertStringPathToPath(String str) {
+		return FileSystems.getDefault().getPath(str);
 	}
 
-	public static boolean createFile(Path path,String fileName) {
+	/**
+	 * ディレクトリを作成する。
+	 * @param path ディレクトリパス
+	 * @return 作成ディレクトリ
+	 * @throws IOException I/Oが発生した場合。
+	 */
+	public static Path createDirectory(Path path) throws IOException {
+		return Files.createDirectories(path);
+	}
 
-		return true;
+	public static Path createFile (String strDirectoryWithFileName) {
+		return Paths.get(strDirectoryWithFileName);
+	}
+
+	public static Path createFile(Path path,String fileName) {
+		return createFile(joinDirectoryAndFileName(path.toString(),fileName));
 	}
 
 	/**
@@ -104,6 +124,10 @@ public class FileUtils {
 	public static Date getLastModifiedDateFormatDate() {
 
 		return new Date();
+	}
+
+	private static String joinDirectoryAndFileName(String directory,String fileName) {
+		return new String();
 	}
 
 }
